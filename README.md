@@ -1,4 +1,4 @@
-# vue-ts-practice
+# vue_test
 
 ## Project setup
 ```
