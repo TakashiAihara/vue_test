@@ -1,0 +1,26 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "vuejs: start",
+            "type": "npm",
+            "script": "serve",
+            "isBackground": true,
+            "options": {
+                "env": {
+                    "PATH": "${env:PATH}:/usr/local/bin"
+                }
+            },
+            "problemMatcher": {
+                "pattern": {
+                    "regexp": ""
+                },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "^.*building.*",
+                    "endsPattern": "^.*Compiled successfully.*"
+                }
+            }
+        }
+    ]
+}
