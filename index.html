@@ -1,0 +1,57 @@
+<!-- 開発バージョン、便利なコンソールの警告が含まれています -->
+<script src="https://unpkg.com/vue@next"></script>
+<script src="http://localhost:8098"></script>
+<html>
+
+<head></head>
+
+
+<body>
+  <div id="watch-example">
+    <p>
+      Ask a yes/no question:
+      <input v-model="question" />
+    </p>
+    <p>{{ answer }}</p>
+  </div>
+</body>
+
+
+<!-- ajax ライブラリや汎用ユーティリティメソッドのコレクションなどの      -->
+<!-- 豊富なエコシステムがすでに存在するため、それらを再発明しないことで -->
+<!-- Vue のコアは小規模なまま保たれています。これは、使い慣れたものを  -->
+<!-- 自由に使うことができる、ということでもあります。                  -->
+<script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+<script>
+  const watchExampleVM = Vue.createApp({
+    data() {
+      return {
+        question: '',
+        answer: 'Questions usually contain a question mark. ;-)'
+      }
+    },
+    watch: {
+      // question が変わるたびに、この関数が実行される
+      question(newQuestion, oldQuestion) {
+        console.log(newQuestion, oldQuestion)
+        if (newQuestion.indexOf('?') > -1) {
+          this.getAnswer()
+        }
+      }
+    },
+    methods: {
+      getAnswer() {
+        this.answer = 'Thinking...'
+        axios
+          .get('https://yesno.wtf/api')
+          .then(response => {
+            this.answer = response.data.answer
+          })
+          .catch(error => {
+            this.answer = 'Error! Could not reach the API. ' + error
+          })
+      }
+    }
+  }).mount('#watch-example')
+</script>
+</html>
