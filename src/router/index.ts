@@ -22,4 +22,10 @@ const router = createRouter({
   routes,
 });
 
+(async () => {
+  const test = await new Promise((resolve, reject) => {
+    resolve('test');
+  });
+})();
+
 export default router;

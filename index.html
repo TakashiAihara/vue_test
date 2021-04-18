@@ -10,7 +10,7 @@
   <div id="watch-example">
     <p>
       Ask a yes/no question:
-      <input v-model="question" />
+      <input v-model="question" :class="question"/>
     </p>
     <p>{{ answer }}</p>
   </div>
@@ -27,31 +27,9 @@
     data() {
       return {
         question: '',
-        answer: 'Questions usually contain a question mark. ;-)'
+        answer: 'Questions usually contain a question mark. ;-)',
       }
     },
-    watch: {
-      // question が変わるたびに、この関数が実行される
-      question(newQuestion, oldQuestion) {
-        console.log(newQuestion, oldQuestion)
-        if (newQuestion.indexOf('?') > -1) {
-          this.getAnswer()
-        }
-      }
-    },
-    methods: {
-      getAnswer() {
-        this.answer = 'Thinking...'
-        axios
-          .get('https://yesno.wtf/api')
-          .then(response => {
-            this.answer = response.data.answer
-          })
-          .catch(error => {
-            this.answer = 'Error! Could not reach the API. ' + error
-          })
-      }
-    }
   }).mount('#watch-example')
 </script>
 </html>

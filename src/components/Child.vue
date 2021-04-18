@@ -17,9 +17,6 @@
 // export default class HelloWorld extends Vue {
 //   msg!: string
 // }
-
-// import Child from './src/components/Child.vue';
-
 export default {
   props: ['pval'],
   methods: {
